@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>获取dom元素</title>
+</head>
+<body>
+<div id="mydiv">火锅</div>
+<div>烧烤</div>
+<div>寿司</div>
+<div>云南菜</div>
+<div>吃喝玩乐</div>
+<div>火锅</div>
+<div>烧烤</div>
+<div>寿司</div>
+<div>云南菜</div>
+<div>吃喝玩乐</div>
+    <script type="text/javascript" charset="utf-8" async defer>
+        /*fast*/
+        function testNextSibling() {
+            var el = document.getElementById('mydiv'),
+                ch = el.firstChild,
+                name = '';
+            do {
+                name = ch.nodeName;
+            } while (ch = ch.nextSibling);
+            return name;
+        };
+        testNextSibling();
+        /*slow*/
+        function testChildNodes() {
+            var el = document.getElementById('mydiv'),
+                ch = el.childNodes,
+                len = ch.length,
+                name = '';
+            for (var count = 0; count < len; count++) {
+                name = ch[count].nodeName;
+            }
+            return name;
+        };
+        testChildNodes();
+    </script>
+</body>
+</html>

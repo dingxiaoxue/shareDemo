@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>HTML集合</title>
+</head>
+<body>
+<div>dingxiaoxue</div>
+<div>dingxiaoxue</div>
+<div>dingxiaoxue</div>
+<div>dingxiaoxue</div>
+<div>dingxiaoxue</div>
+<div>dingxiaoxue</div>
+<div>dingxiaoxue</div>
+<div>dingxiaoxue</div>
+<div>dingxiaoxue</div>
+<div>dingxiaoxue</div>
+    <script>
+     /*一个意外的死循环 因为循环的退出条件alldivs.length在每次迭代都会增加*/
+     /*底层文档的当前状态*/
+     /*读取一个集合的length比读取普通数组的length要慢的多 因为每次都要重新查询*/
+    var alldivs = document.getElementsByTagName('div');
+    for (var i = 0; i < alldivs.length; i++) {
+        document.body.appendChild(document.createElement('div'))
+    }
+    /********/
+
+    /*把coll复制到一个数组arr里面*/
+    var coll = document.getElementsByTagName('div');
+    var ar   = toArray(coll);
+    function toArray(coll) {
+        for (var i = 0, a = [], len = coll.length; i < len; i++) {
+            a[i] = coll[i];
+        }
+        return a;
+    }
+    // toArray(coll);
+    //slower
+    function loopCollection() {
+        for (var count = 0; count < coll.length; count++) {
+            /* do nothing */
+        }
+    }
+    // faster
+    function loopCopiedArray() {
+        for (var count = 0; count < arr.length; count++) {
+            /* do nothing */
+        }
+    }
+    /*处理方法：把集合的长度缓存到一个局部变量中，然后再循环条件退出语句中使用该方法*/
+    //faster
+    function loopCacheLengthCollection() {
+        var coll = document.getElementsByTagName('div'),
+            len = coll.length;
+        for (var count = 0; count < len; count++) {
+            /* do nothing */
+        }
+    }
+//loopCopiedArray() 和 loopCacheLengthCollection() 一样快
+
+    </script>
+</body>
+</html>

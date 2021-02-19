@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>script defer</title>
+    <script defer href="">
+        alert("defer");
+    </script>
+</head>
+<body>
+    <script defer>
+        alert("defer");
+    </script>
+    <script>
+       window.onload=function(){
+        alert("load");
+       };
+    </script>
+    <script>
+        alert("script");
+    </script>
+    <script async>
+        alert("async");
+    </script>
+  <!--   对于不支持defer和async的浏览器：script async defer load
+    对于支持defer和async的浏览器：defer async  script  load  -->  
+</body>
+</html>

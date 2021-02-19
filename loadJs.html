@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>动态脚本元素</title>
+</head>
+<body>
+    <script type="text/javascript" charset="utf-8" async defer>
+    // readyState有五种状态值（IE）
+    // uninitialized:初始状态
+    // loading:开始下载
+    // interactive:数据完成下载但是尚不可用
+    // complete:所有数据已经准备就绪
+        function loadScript(url,callback){
+            var script =document.createElement("script")
+            script.type="text/javascript";
+            //IE
+            if(script.readyState){
+                script.onreadystatechange=function(){
+                    if(script.ready.readyState == "loaded"||script.ready.readyState == "complete"){
+                        script.onreadystatechange = null;
+                        callback();
+                    }
+                }
+            }else{//其他浏览器
+                script.onload = function(){
+                    callback();
+                };
+            }
+            script.src = url;
+            document.getElementsByTagName("head")[0].appendChild(script);
+        }
+        //把js添加到页面
+        // loadScript("js/file1.js",function(){
+        //     alert("js文件加载成功");
+        // })
+        //多个js文件的时候要注意顺序
+        //Firefox和Opera会按照指定的顺序加载js文件
+        //其他浏览器会按照服务端返回的顺序下载和执行代码
+        //把下载顺序串联起来确保下载顺序
+        loadScript("js/file1.js",function(){
+            loadScript("js/file2.js",function(){
+                loadScript("js/flie3.js",function(){
+                    alert("所有的js都加在完成了");
+                });
+            });
+        });
+        //但是如果要加载的js文件很多 最好按顺序合成一个文件 下载一个文件就可以获得所有的代码
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>标识符解析</title>
+</head>
+<body>
+<a style="display:block;width: 100px;height: 35px; cursor: pointer;">js</a>
+<a style="display:block;width: 100px;height: 35px; cursor: pointer;">什么</a>
+<a style="display:block;width: 100px;height: 35px; cursor: pointer;">11</a>
+<a style="display:block;width: 100px;height: 35px; cursor: pointer;">啊啊</a>
+<a style="display:block;width: 100px;height: 35px; cursor: pointer;">啥啥啥</a>
+<input style="width: 100px;height: 35px;" value="点我" type="button" id="go-btn">
+    <script defer async>
+        function initUI(){
+            var doc = document,
+                bd = doc.body,
+                links = doc.getElementsByTagName("a"),
+                i= 10,
+                len = links.length;
+            while(i < len){
+                update(links[i++]);
+            }
+            doc.getElementById("go-btn").onclick = function(){
+                start();
+            };
+            bd.className = "active";
+        }
+        function start(){
+            alert('lalal');
+        }
+        initUI();
+        //把document存储到局部变量doc中
+        //访问全局变量的次数由3次减少到1次
+        //如果有几十个全局变量被反复访问 那么性能会有很大提升
+    </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>DOM访问与修改</title>
+</head>
+<body>
+<div id="here" style="width: 80%; height: auto; ">丁晓雪</div>
+    <script defer async>
+        /*最坏的情况就是在循环中访问或者修改dom，尤其是对HTML元素集合循环的操作*/
+        /*问题：每次循环迭代，该元素都被访问两次：一次读取innerHTML属性值，另一次重写它*/
+        //  function innerHTMLLoop() {
+        //     for (var count = 0; count < 15000; count++) {
+        //         document.getElementById('here').innerHTML += 'a';
+        //     }
+
+        // }
+        // innerHTMLLoop();
+        /*修改后的版本*/
+        function innerHTMLLoop2() {
+            var content = '';
+            for (var count = 0; count < 15000; count++) {
+                content += 'a';
+            }
+            document.getElementById('here').innerHTML += content;
+        }
+        innerHTMLLoop2()
+    </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>访问集合时使用局部变量</title>
+</head>
+<body>
+<div>火锅</div>
+<div>烧烤</div>
+<div>寿司</div>
+<div>云南菜</div>
+<div>吃喝玩乐</div>
+<div>火锅</div>
+<div>烧烤</div>
+<div>寿司</div>
+<div>云南菜</div>
+<div>吃喝玩乐</div>
+    <script type="text/javascript" charset="utf-8" async defer>
+    /*slow*/
+    function collectionGlobal() {
+        var coll = document.getElementsByTagName('div'),
+            len = coll.length,
+            name = '';
+        for (var count = 0; count < len; count++) {
+            name = document.getElementsByTagName('div')[count].nodeName;
+            name = document.getElementsByTagName('div')[count].nodeType;
+            name = document.getElementsByTagName('div')[count].tagName;
+        }
+        return name;
+    };
+    collectionGlobal();
+    /*faster*/
+    function collectionLocal() {
+        var coll = document.getElementsByTagName('div'),
+            len = coll.length,
+            name = '';
+        for (var count = 0; count < len; count++) {
+            name = coll[count].nodeName;
+            name = coll[count].nodeType;
+            name = coll[count].tagName;
+        }
+        return name;
+    };
+    collectionLocal();
+    /*fastest*/
+    function collectionNodesLocal() {
+        var coll = document.getElementsByTagName('div'),
+            len = coll.length,
+            name = '',
+            el = null;
+        for (var count = 0; count < len; count++) {
+            el = coll[count];
+            name = el.nodeName;
+            name = el.nodeType;
+            name = el.tagName;
+        }
+        return name;
+    };
+    collectionNodesLocal();
+    </script>
+</body>
+</html>
